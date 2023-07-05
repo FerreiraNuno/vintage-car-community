@@ -1,0 +1,184 @@
+<div class="container">
+ 
+  <div class="wrapper">
+    <div class="row">
+      <div class="col-12">
+        <div class="wrapper_header mb-5">
+          <h3>Suche Lagerplätze</h3>
+        </div>
+        <div class="wrapper_body">
+          <form [formGroup]="searchForm">
+            <div class="row">
+              <div class="col-12 col-md-6 mb-4">
+                <div class="form-group form_group">
+                  <label>Ein Auto auswählen</label>
+                  <select
+                    name=""
+                    id=""
+                    formControlName="car"
+                    class="form-control"
+                  >
+                    <option value="">Ein Auto auswählen</option>
+                    <option value="item.id" *ngFor="let item of cars">
+                      {{ item?.name }}
+                    </option>
+                  </select>
+                  <div class="invalid-feedback">Please Ein Auto auswählen</div>
+                </div>
+              </div>
+              <div class="col-12 col-md-6 mb-4">
+                <div class="form-group form_group">
+                  <label>Standort auswählen</label>
+                  <select
+                    name=""
+                    id=""
+                    formControlName="car"
+                    class="form-control"
+                  >
+                    <option value="">Standort auswählen</option>
+                    <option value="1">Berlin</option>
+                    <option value="2">Leipzig</option>
+                    <option value="3">Munich</option>
+                    <option value="4">Bremen</option>
+                  </select>
+                  <div class="invalid-feedback">Please Standort auswählen</div>
+                </div>
+              </div>
+            </div>
+          </form>
+          <div class="Aktionen d-flex justify-content-end mt-3">
+            <button
+              mat-button
+              cdkFocusInitial
+              class="btn btn-purple btn-md"
+              (click)="submit()"
+            >
+              Search
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-container *ngIf="searched">
+  <ng-container
+    *ngIf="
+      storageBins.length > 0
+    "
+  >
+    <div>
+      <!-- mobile table -->
+
+      <section class="d-block d-md-none">
+        <h3 class="mb-3 mobileTableCaption">Storage Bins</h3>
+        <div
+          *ngFor="let storage of storageBins"
+          class="border br-8 p-4 mb-5"
+          style="font-size: 1.4rem"
+        >
+          <div class="d-flex">
+            <label class="fw-bold text-body w-30 text-break">Name: </label>
+            <p class="text-body w-70 ps-3 text-break">
+              {{ storage?.name }}
+            </p>
+          </div>
+          <hr />
+          <div class="d-flex">
+            <label class="fw-bold text-body w-30 text-break">Dimension </label>
+            <p class="text-body w-70 ps-3 text-break">
+              {{ storage?.dimension?.width }} x {{ storage?.dimension?.height }}
+            </p>
+          </div>
+          <hr />
+          <div class="d-flex">
+            <label class="fw-bold text-body w-30 text-break">Standort </label>
+            <p class="text-body w-70 ps-3 text-break">
+              {{ storage?.location?.streetName }} {{ storage?.location?.city }},
+              {{ storage?.location?.state }}
+            </p>
+          </div>
+          <hr />
+          <div class="d-flex">
+            <label class="fw-bold text-body w-30 text-break"
+              >Dienstzeit
+            </label>
+            <p class="text-body w-70 ps-3 text-break">
+              {{ storage?.serviceTime?.start }} -
+              {{ storage?.serviceTime?.end }}
+            </p>
+          </div>
+          <hr />
+          <div class="d-flex">
+            <label class="fw-bold text-body w-30 text-break">Action: </label>
+            <div class="click d-flex">
+              <img class="pe-2" src="assets/icons/update.svg" alt="" />
+              <span>Book</span>
+            </div>
+            <div class="click d-flex">
+              <img class="pe-2" src="assets/icons/update.svg" alt="" />
+              <span>Termin vereinbaren</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- desktop table -->
+
+      <div class="archive-retention-wrapper m-0 d-none d-md-block">
+        <app-filetra-card
+          ><div>
+            <app-table-header [table_name]="'Storage Bin'"></app-table-header>
+            <div class="archive-retention-table table-responsive bg-white">
+              <table class="table caption-top text-nowrap" datatable>
+                <ng-container
+                  *ngIf="storageBins.length > 0"
+                >
+                  <thead>
+                    <tr class="py-3">
+                      <th>Name</th>
+                      <th>Dimension</th>
+                      <th>Standort</th>
+                      <th>Dienstzeit</th>
+                      <th>Aktionen</th>
+                    </tr>
+                  </thead>
+                </ng-container>
+                <tbody>
+                  <ng-container>
+                    <tr *ngFor="let storage of storageBins">
+                      <td>{{ storage?.name }}</td>
+                      <td>
+                        {{ storage?.dimension?.width }} x
+                        {{ storage?.dimension?.height }}
+                      </td>
+                      <td>
+                        {{ storage?.location?.streetName }}
+                        {{ storage?.location?.city }},
+                        {{ storage?.location?.state }}
+                      </td>
+                      <td>
+                        {{ storage?.serviceTime?.start }} -
+                        {{ storage?.serviceTime?.end }}
+                      </td>
+
+                      <td class="">
+                        <span class="me-3 click">
+                          Service buchen
+                        </span>
+                        <span class="text-warning click">
+                          Termin vereinbaren
+                        </span>
+                      </td>
+                    </tr></ng-container
+                  >
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </app-filetra-card>
+      </div>
+    </div>
+  </ng-container>
+</ng-container>

@@ -14,8 +14,21 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ShellComponent } from './shell/shell.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { LayoutComponent } from './layout/layout.component';
+import { TableHeaderComponent } from './table-header/table-header.component';
+import { FiletraCardComponent } from './filetra-card/filetra-card.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
-const components = [ShellComponent];
+const components = [
+  ShellComponent,
+  SidebarComponent,
+  NavbarComponent,
+  LayoutComponent,
+  TableHeaderComponent,
+  FiletraCardComponent,
+];
 
 const modules = [
   CommonModule,
@@ -31,15 +44,13 @@ const modules = [
   MatFormFieldModule,
   MatInputModule,
   MatSnackBarModule,
-  RouterModule
+  RouterModule,
+  MatDialogModule,
 ];
 
 @NgModule({
   declarations: [...components],
   imports: [...modules],
-  exports: [
-    ...components,
-    ...modules,
-  ]
+  exports: [...components, ...modules],
 })
 export class SharedModule {}

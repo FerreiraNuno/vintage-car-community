@@ -1,0 +1,120 @@
+<ng-container>
+  <ng-container
+    *ngIf="
+      services.length > 0
+    "
+  >
+    <div>
+      <!-- mobile table -->
+
+      <section class="d-block d-md-none">
+        <h3 class="mb-3 mobileTableCaption">Gebuchte Services</h3>
+        <div
+          *ngFor="let item of services"
+          class="border br-8 p-4 mb-5"
+          style="font-size: 1.4rem"
+        >
+          <div class="d-flex">
+            <label class="fw-bold text-body w-30 text-break">Name: </label>
+            <p class="text-body w-70 ps-3 text-break">
+              {{ item?.name }}
+            </p>
+          </div>
+          <hr />
+          <div class="d-flex">
+            <label class="fw-bold text-body w-30 text-break"
+              >Gebuchtes Datum
+            </label>
+            <p class="text-body w-70 ps-3 text-break">
+              {{ item?.dateListed }}
+            </p>
+          </div>
+          <hr />
+          <div class="d-flex">
+            <label class="fw-bold text-body w-30 text-break"
+              >Ablaufdatum
+            </label>
+            <p class="text-body w-70 ps-3 text-break">
+              {{ item?.expiryDate }}
+            </p>
+          </div>
+          <hr />
+          <div class="d-flex">
+            <label class="fw-bold text-body w-30 text-break">Status </label>
+            <p class="text-body w-70 ps-3 text-break">
+              {{
+                item.status == 1
+                  ? "Genehmigt"
+                  : item.status == 2
+                  ? "Abgelehnt"
+                  : "Ausstehend"
+              }}
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- desktop table -->
+
+      <div class="archive-retention-wrapper m-0 d-none d-md-block">
+        <app-filetra-card
+          ><div>
+            <app-table-header
+              [table_name]="'Gebuchte Services'"
+            ></app-table-header>
+            <div class="archive-retention-table table-responsive bg-white">
+              <table class="table caption-top text-nowrap" datatable>
+                <ng-container
+                  *ngIf="services.length > 0"
+                >
+                  <thead>
+                    <tr class="py-3">
+                      <th>Name</th>
+                      <th>Gebuchtes Datum</th>
+                      <th>Ablaufdatum</th>
+                      <th>Status</th>
+                      <!-- <th>Actions</th> -->
+                    </tr>
+                  </thead>
+                </ng-container>
+                <tbody>
+                  <ng-container *ngIf="services.length > 0">
+                    <tr *ngFor="let item of services">
+                      <td>{{ item?.name }}</td>
+                      <td>
+                        {{ item?.dateListed }}
+                      </td>
+                      <td>
+                        {{ item?.expiryDate }}
+                      </td>
+
+                      <td>
+                        <div class="d-flex justify-content-start">
+                          <span
+                            class="badge click"
+                            [ngClass]="{
+                              'badge-success': item.status == 1,
+                              'badge-warning': item.status == 0,
+                              'badge-error': item.status == 2
+                            }"
+                            >{{
+                              item.status == 1
+                                ? "Genehmigt"
+                                : item.status == 2
+                                ? "Abgelehnt"
+                                : "Ausstehend"
+                            }}
+                          </span>
+                        </div>
+                      </td>
+                    </tr></ng-container
+                  >
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </app-filetra-card>
+      </div>
+    </div>
+  </ng-container>
+</ng-container>

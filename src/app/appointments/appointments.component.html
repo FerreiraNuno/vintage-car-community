@@ -1,0 +1,158 @@
+<ng-container
+  *ngIf="
+   allAppointments.length > 0
+  "
+>
+
+  <div>
+    <!-- mobile table -->
+
+    <section class="d-block d-md-none">
+      <h3 class="mb-3 mobileTableCaption">Alle Termine</h3>
+      <div
+        *ngFor="let item of allAppointments"
+        class="border br-8 p-4 mb-5"
+        style="font-size: 1.4rem"
+      >
+        <div class="d-flex">
+          <label class="fw-bold text-body w-30 text-break">Benutzer: </label>
+          <p class="text-body w-70 ps-3 text-break">
+            {{ item?.name }}
+          </p>
+        </div>
+        <hr />
+        <div class="d-flex">
+          <label class="fw-bold text-body w-30 text-break">Lagerhalter</label>
+          <p class="text-body w-70 ps-3 text-break">
+            {{ item?.bin?.name }}
+          </p>
+        </div>
+        <hr />
+        <div class="d-flex">
+          <label class="fw-bold text-body w-30 text-break">Standort</label>
+          <p class="text-body w-70 ps-3 text-break">
+            {{ item?.bin?.location?.state }},
+            {{ item?.bin?.location?.country }}
+          </p>
+        </div>
+        <hr />
+        <div class="d-flex">
+          <label class="fw-bold text-body w-30 text-break">Gebuchtes Datum </label>
+          <p class="text-body w-70 ps-3 text-break">
+            {{ item?.date }}
+          </p>
+        </div>
+        <hr />
+        <div class="d-flex">
+          <label class="fw-bold text-body w-30 text-break">Status </label>
+          <p class="text-body w-70 ps-3 text-break">
+            {{
+              item.status == 1
+                ? "Approved"
+                : item.status == 2
+                ? "Rejected"
+                : "Pending"
+            }}
+          </p>
+        </div>
+        <hr />
+        <div class="d-flex">
+          <label class="fw-bold text-body w-30 text-break">Aktion: </label>
+          <div class="click d-flex">
+            <img class="pe-2" src="assets/icons/update.svg" alt="" />
+            <span>Genehmigen</span>
+          </div>
+          <div class="click d-flex">
+            <img class="pe-2" src="assets/icons/update.svg" alt="" />
+            <span>Ablehnen</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- desktop table -->
+
+    <div class="archive-retention-wrapper m-0 d-none d-md-block">
+      <app-filetra-card>
+        <div>
+          <app-table-header
+            [table_name]="'Alle Termine'"
+          ></app-table-header>
+          <div class="archive-retention-table table-responsive bg-white">
+            <table class="table caption-top text-nowrap" datatable>
+              <ng-container
+                *ngIf="allAppointments.length > 0"
+              >
+                <thead>
+                  <tr class="py-3">
+                    <th>Benutzer</th>
+                    <th>Lagerhalter</th>
+                    <th>Standort</th>
+                    <th>Gebuchtes Datum</th>
+                    <th>Status</th>
+                    <th>Aktionen</th>
+                  </tr>
+                </thead>
+              </ng-container>
+              <tbody>
+                <ng-container>
+                  <tr *ngFor="let item of allAppointments">
+                    <td>{{ item?.name }}</td>
+                    <td>
+                      {{ item?.bin?.name }}
+                    </td>
+                    <td>
+                      {{ item?.bin?.location?.state }},
+                      {{ item?.bin?.location?.country }}
+                    </td>
+                    <td>
+                      {{ item?.date }}
+                    </td>
+                    <td>
+                      <div class="d-flex justify-content-start">
+                        <span
+                          class="badge click"
+                          [ngClass]="{
+                            'badge-success': item.status == 1,
+                            'badge-warning': item.status == 0,
+                            'badge-error': item.status == 2
+                          }"
+                          >{{
+                            item.status == 1
+                              ? "Approved"
+                              : item.status == 2
+                              ? "Rejected"
+                              : "Pending"
+                          }}
+                        </span>
+                      </div>
+                    </td>
+
+                    <td class="" *ngIf="item.status == 0">
+                      <span class="me-3 click">
+                        <img
+                          class="pe-2"
+                          src="assets/icons/update.svg"
+                          alt=""
+                        />
+                        Genehmigen
+                      </span>
+                      <span
+                        class="text-danger click"
+                      >
+                      Ablehnen
+                      </span>
+                    </td>
+                  </tr></ng-container
+                >
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </app-filetra-card>
+    </div>
+  </div>
+
+
+  
+</ng-container>

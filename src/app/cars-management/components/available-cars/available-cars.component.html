@@ -1,0 +1,245 @@
+<ng-container>
+  <ng-container
+  
+  >
+    <div>
+      <!-- Add Form -->
+
+      <div class="wrapper_add">
+        <div class="row">
+          <div class="col-12">
+            <div class="wrapper_add_header mb-5">
+              <h3>Neues Auto hinzufügen</h3>
+            </div>
+            <div class="wrapper_body">
+              <form [formGroup]="carForm">
+                <div class="row">
+                  <div class="col-12 col-md-6">
+                    <div class="form-group form_group">
+                      <label>Name <span>● </span></label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Enter Car Name"
+                        formControlName="name"
+                        [ngClass]="{
+                          'is-invalid':
+                            (carForm.get('name')?.errors &&
+                              carForm.get('name')?.touched) ||
+                            (carForm.get('name')?.hasError('required') &&
+                              carFormSubmitted)
+                        }"
+                      />
+                      <div
+                        class="invalid-feedback"
+                        *ngIf="
+                          carForm.get('name')?.hasError('required') &&
+                          carFormSubmitted
+                        "
+                      >
+                        Required
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <div class="form-group form_group">
+                      <label>Mach<span>● </span></label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Enter Car Mach"
+      
+                        formControlName="Mach"
+                        [ngClass]="{
+                          'is-invalid':
+                            (carForm.get('Mach')?.errors &&
+                              carForm.get('Mach')?.touched) ||
+                            (carForm.get('Mach')?.hasError('required') &&
+                              carFormSubmitted)
+                        }"
+                      />
+                      <div
+                        class="invalid-feedback"
+                        *ngIf="
+                          carForm.get('Mach')?.hasError('required') &&
+                          carFormSubmitted
+                        "
+                      >
+                        Required
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <div class="form-group form_group">
+                      <label>Jahr<span>● </span></label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Enter Car Year"
+                        
+                        formControlName="year"
+                        [ngClass]="{
+                          'is-invalid':
+                            (carForm.get('year')?.errors &&
+                              carForm.get('year')?.touched) ||
+                            (carForm.get('year')?.hasError('required') &&
+                              carFormSubmitted)
+                        }"
+                      />
+                      <div
+                        class="invalid-feedback"
+                        *ngIf="
+                          carForm.get('year')?.hasError('required') &&
+                          carFormSubmitted
+                        "
+                      >
+                        Required
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <div class="form-group form_group">
+                      <label>Standort<span>● </span></label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Enter Car Location"
+                        
+                        formControlName="location"
+                        [ngClass]="{
+                          'is-invalid':
+                            (carForm.get('location')?.errors &&
+                              carForm.get('location')?.touched) ||
+                            (carForm.get('location')?.hasError('required') &&
+                              carFormSubmitted)
+                        }"
+                      />
+                      <div
+                        class="invalid-feedback"
+                        *ngIf="
+                          carForm.get('location')?.hasError('required') &&
+                          carFormSubmitted
+                        "
+                      >
+                        Required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+              <div class="Aktionen d-flex justify-content-end mt-3">
+                <button class="btn btn-secondary btn-lg" (click)="submitAdd()">
+                  Neues Auto hinzufügen
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- End Add Form -->
+
+      <!-- mobile table -->
+
+      <section class="d-block d-md-none">
+        <h3 class="mb-3 mobileTableCaption">Autos Management</h3>
+        <div
+          *ngFor="let item of cars"
+          class="border br-8 p-4 mb-5"
+          style="font-size: 1.4rem"
+        >
+          <div class="d-flex">
+            <label class="fw-bold text-body w-30 text-break">Name: </label>
+            <p class="text-body w-70 ps-3 text-break">
+              {{ item?.name }}
+            </p>
+          </div>
+          <hr />
+          <div class="d-flex">
+            <label class="fw-bold text-body w-30 text-break">Mach</label>
+            <p class="text-body w-70 ps-3 text-break">
+              {{ item?.make}}
+            </p>
+          </div>
+          <hr />
+          <div class="d-flex">
+            <label class="fw-bold text-body w-30 text-break">Jahr</label>
+            <p class="text-body w-70 ps-3 text-break">
+              {{ item?.year}}
+            </p>
+          </div>
+          <hr />
+          <div class="d-flex">
+            <label class="fw-bold text-body w-30 text-break">Standort</label>
+            <p class="text-body w-70 ps-3 text-break">
+              {{ item?.location}}
+            </p>
+          </div>
+          <hr />
+          <div class="d-flex">
+            <label class="fw-bold text-body w-30 text-break">Action: </label>
+            <div class="click d-flex">
+              <img class="pe-2" src="assets/icons/update.svg" alt="" />
+              <span>bearbeiten</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- desktop table -->
+
+      <div class="archive-retention-wrapper m-0 d-none d-md-block">
+        <app-filetra-card
+          ><div>
+            <app-table-header
+              [table_name]="'Autos Management'"
+              (btnAction)="addNewCar()"
+            ></app-table-header>
+            <div class="archive-retention-table table-responsive bg-white">
+              <table class="table caption-top text-nowrap" datatable>
+                <ng-container>
+                  <thead>
+                    <tr class="py-3">
+                      <th>Name</th>
+                      <th>Mach</th>
+                      <th>Year</th>
+                      <th>Location</th>
+                      <th>Aktionen</th>
+                    </tr>
+                  </thead>
+                </ng-container>
+                <tbody>
+                  <ng-container>
+                    <tr *ngFor="let item of cars">
+                      <td>{{ item?.name }}</td>
+                      <td>
+                        {{ item?.make}}
+                      </td>
+                      <td>
+                        {{ item?.year}}
+                      </td>
+                      <td>
+                        {{ item?.location}}
+                      </td>
+                      <td class="">
+                        <span class="me-3 click" (click)="editCar(item.id)">
+                          <img
+                            class="pe-2"
+                            src="assets/icons/update.svg"
+                            alt=""
+                          />
+                          bearbeiten
+                        </span>
+                        <span class="text-danger click"> Löschen</span>
+                      </td>
+                    </tr></ng-container
+                  >
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </app-filetra-card>
+      </div>
+    </div>
+  </ng-container>
+</ng-container>

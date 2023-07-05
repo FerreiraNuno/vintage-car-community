@@ -1,0 +1,146 @@
+<ng-container
+  
+>
+  <div>
+    <!-- mobile table -->
+
+    <section class="d-block d-md-none">
+      <h3 class="mb-3 mobileTableCaption">Anfragen zu Parkplätzen</h3>
+      <div
+        *ngFor="let item of parkingSpaces"
+        class="border br-8 p-4 mb-5"
+        style="font-size: 1.4rem"
+      >
+        <div class="d-flex">
+          <label class="fw-bold text-body w-30 text-break">Name: </label>
+          <p class="text-body w-70 ps-3 text-break">
+            {{ item?.name }}
+          </p>
+        </div>
+        <hr />
+        <div class="d-flex">
+          <label class="fw-bold text-body w-30 text-break">Auto </label>
+          <p class="text-body w-70 ps-3 text-break">
+            {{ item?.car }}
+          </p>
+        </div>
+        <hr />
+        <div class="d-flex">
+          <label class="fw-bold text-body w-30 text-break">Datum </label>
+          <p class="text-body w-70 ps-3 text-break">
+            {{ item?.date }}
+          </p>
+        </div>
+        <hr />
+        <div class="d-flex">
+          <label class="fw-bold text-body w-30 text-break"
+            >Gewünschte Zeit
+          </label>
+          <p class="text-body w-70 ps-3 text-break">
+            {{ item?.proposedTime }}
+          </p>
+        </div>
+        <hr />
+        <div class="d-flex">
+          <label class="fw-bold text-body w-30 text-break">Status </label>
+          <p class="text-body w-70 ps-3 text-break">
+            {{
+              item.status == 1
+                ? "Akzeptiert"
+                : item.status == 2
+                ? "Abgelehnt"
+                : "Pending"
+            }}
+          </p>
+        </div>
+        <hr />
+        <div class="d-flex">
+          <label class="fw-bold text-body w-30 text-break">Action: </label>
+          <div class="click d-flex">
+            <img class="pe-2" src="assets/icons/update.svg" alt="" />
+            <span>Accept</span>
+          </div>
+          <div class="click d-flex">
+            <img class="pe-2" src="assets/icons/update.svg" alt="" />
+            <span>Reject</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- desktop table -->
+
+    <div class="archive-retention-wrapper m-0 d-none d-md-block">
+      <app-filetra-card
+        ><div>
+          <app-table-header [table_name]="'Anfragen zu Parkplätzen'"></app-table-header>
+          <div class="archive-retention-table table-responsive bg-white">
+            <table class="table caption-top text-nowrap" datatable>
+              <ng-container
+                *ngIf="parkingSpaces.length > 0"
+              >
+                <thead>
+                  <tr class="py-3">
+                    <th>Name</th>
+                    <th>Auto</th>
+                    <th>Datum</th>
+                    <th>Gewünschte Zeit</th>
+                    <th>Status</th>
+                    <th>Aktionen</th>
+                  </tr>
+                </thead>
+              </ng-container>
+              <tbody>
+                <ng-container>
+                  <tr *ngFor="let item of parkingSpaces">
+                    <td>{{ item?.name }}</td>
+                    <td>
+                      {{ item?.car }}
+                    </td>
+                    <td>
+                      {{ item?.date }}
+                    </td>
+                    <td>
+                      {{ item?.proposedTime }}
+                    </td>
+                    <td>
+                      <div class="d-flex justify-content-start">
+                        <span
+                          class="badge click"
+                          [ngClass]="{
+                            'badge-success': item.status == 1,
+                            'badge-warning': item.status == 0,
+                            'badge-error': item.status == 2
+                          }"
+                          >{{
+                            item.status == 1
+                              ? "Akzeptiert"
+                              : item.status == 2
+                              ? "Abgelehnt"
+                              : "Pending"
+                          }}
+                        </span>
+                      </div>
+                    </td>
+
+                    <td class="">
+                      <span class="me-3 click">
+                        <img
+                          class="pe-2"
+                          src="assets/icons/update.svg"
+                          alt=""
+                        />
+                       Akzeptieren
+                      </span>
+                      <span class="text-danger click"> Ablehnen </span>
+                    </td>
+                  </tr></ng-container
+                >
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </app-filetra-card>
+    </div>
+  </div>
+</ng-container>

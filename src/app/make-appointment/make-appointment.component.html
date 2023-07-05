@@ -1,0 +1,38 @@
+<div class="archive-retention-wrapper m-0 d-none d-md-block">
+  <app-filetra-card>
+    <h2 class="mb-4">Einen Termin vereinbaren</h2>
+    <div class="row" [formGroup]="apptForm">
+      <div class="col-12 mb-5">
+        <div class="form-group form_group">
+          <label>Termin Datum & Zeit <span>● </span></label>
+          <input
+            type="datetime-local"
+            class="form-control"
+            placeholder="Select A Date & Time"
+            formControlName="date"
+            [ngClass]="{
+              'is-invalid':
+                (apptForm.get('date')?.errors &&
+                  apptForm.get('date')?.touched) ||
+                (apptForm.get('date')?.hasError('required'))
+            }"
+          />
+          <div
+            class="invalid-feedback"
+            *ngIf="apptForm.get('date')?.hasError('required') && formSubmitted"
+          >
+          Erforderlich
+          </div>
+        </div>
+      </div>
+      <div class="col-12 d-flex justify-content-end">
+        <button
+          class="btn btn-secondary btn-lg"
+          (click)="submit()"
+        >
+        Termin vereinbaren
+        </button>
+      </div>
+    </div>
+  </app-filetra-card>
+</div>
