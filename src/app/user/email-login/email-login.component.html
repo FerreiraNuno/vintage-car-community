@@ -1,21 +1,24 @@
 <mat-card>
     <div *ngIf="isSignup">
-      <h3>Create Account</h3>
-  
-      <button mat-stroked-button class="login-type" (click)="changeType('login')">
-        Returning user?
+      <h3>Registriegen</h3>
+      <button mat-raised-button
+        color="accent"
+        type="submit" class="login-type" (click)="changeType('login')">
+        Hier zum Einloggen
       </button>
     </div>
   
     <div *ngIf="isLogin">
-      <h3>Sign In</h3>
-      <button size="small" mat-stroked-button class="login-type"  (click)="changeType('signup')">
-        New user?
+      <h3>Einloggen</h3>
+      <button mat-raised-button
+        color=""
+        type="submit" class="login-type"  (click)="changeType('signup')">
+        Neuer Benutzer?
       </button>
     </div>
   
     <div *ngIf="isPasswordReset">
-      <h3>Reset Password</h3>
+      <h3>Passwort zurücksetzen</h3>
       <button size="small" mat-button (click)="changeType('login')">Back</button>
     </div>
   
@@ -30,7 +33,7 @@
         />
   
         <mat-error *ngIf="email?.invalid && email?.dirty">
-          You must enter a valid email address
+          E-Mail Adresse ungültig
         </mat-error>
       </mat-form-field>
   
@@ -44,7 +47,7 @@
         />
   
         <mat-error *ngIf="email?.invalid && email?.dirty">
-          Password must be at least 6 characters long
+          Paswswort muss mindestens 6 Zeichen haben
         </mat-error>
       </mat-form-field>
   
@@ -61,7 +64,7 @@
         />
   
         <mat-error *ngIf="passwordConfirm && !passwordDoesMatch">
-          Password does not match
+          Passwörter stimmen nicht überein
         </mat-error>
       </mat-form-field>
   
@@ -73,7 +76,7 @@
         type="submit"
         [disabled]="loading"
       >
-        Send Reset Email
+        E-Mail zum zurücksetzen schicken
       </button>
   
       <button
@@ -83,7 +86,7 @@
         type="submit"
         [disabled]="form.invalid || !passwordDoesMatch || loading"
       >
-        Submit
+        Anmelden
       </button>
     </form>
   
@@ -92,6 +95,6 @@
       *ngIf="isLogin && !isPasswordReset"
       (click)="changeType('reset')"
     >
-      Forgot password?
+      Passwort vergessen?
     </button>
   </mat-card>
