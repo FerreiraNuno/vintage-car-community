@@ -85,12 +85,6 @@
             </p>
           </div>
           <hr />
-          <div class="d-flex">
-            <label class="fw-bold text-body w-30 text-break">Dimension </label>
-            <p class="text-body w-70 ps-3 text-break">
-              {{ storage?.dimension?.width }} x {{ storage?.dimension?.height }}
-            </p>
-          </div>
           <hr />
           <div class="d-flex">
             <label class="fw-bold text-body w-30 text-break">Standort </label>
@@ -138,7 +132,6 @@
                   <thead>
                     <tr class="py-3">
                       <th>Name</th>
-                      <th>Dimension</th>
                       <th>Standort</th>
                       <th>Dienstzeit</th>
                       <th>Aktionen</th>
@@ -149,10 +142,6 @@
                   <ng-container>
                     <tr *ngFor="let storage of storageBins">
                       <td>{{ storage?.name }}</td>
-                      <td>
-                        {{ storage?.dimension?.width }} x
-                        {{ storage?.dimension?.height }}
-                      </td>
                       <td>
                         {{ storage?.location?.streetName }}
                         {{ storage?.location?.city }},

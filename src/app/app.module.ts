@@ -10,6 +10,9 @@ import { UserModule } from './user/user.module';
 
 // Firebase imports
 import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 
 
 
@@ -24,6 +27,9 @@ import { AngularFireModule } from '@angular/fire/compat';
     SharedModule,
     UserModule,
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirestore(() => getFirestore()),
   ],
   providers: [],
   bootstrap: [AppComponent]

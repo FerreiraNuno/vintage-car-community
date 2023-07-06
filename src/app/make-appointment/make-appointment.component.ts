@@ -17,7 +17,6 @@ export class MakeAppointmentComponent implements OnInit {
   data: StorageBin = {
     id: 6,
     name: 'Marina Herns',
-    dimension: { width: 45, height: 75 },
     location: {
       houseNumber: 9,
       streetName: 'Sefrd Jumns',

@@ -8,4 +8,6 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
   imports: [CommonModule, SharedModule, DashboardRoutingModule],
   declarations: [DashboardComponent],
 })
-export class DashboardModule {}
+export class DashboardModule {
+  
+}

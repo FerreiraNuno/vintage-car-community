@@ -62,7 +62,7 @@
           <a
             class="side-link"
             routerLinkActive="active"
-            routerLink="/dashboard"
+            routerLink="/dashboard/main"
             (click)="toggleSidebar()"
           >
             <span class="side-icon">
@@ -82,7 +82,7 @@
             <span>Dashboard</span>
           </a>
         </li>
-        <li>
+        <li *ngIf="getIsWarehouseowner">
           <a
             class="side-link"
             routerLinkActive="active"
@@ -108,7 +108,7 @@
             <span>Verwaltung</span>
           </a>
         </li>
-        <li>
+        <li *ngIf="getIsWarehouseowner">
           <a
             class="side-link"
             routerLinkActive="active"
@@ -136,7 +136,7 @@
           </a>
         </li>
 
-        <li>
+        <li *ngIf="!getIsWarehouseowner">
           <a
             class="side-link"
             routerLinkActive="active"
@@ -163,7 +163,7 @@
           </a>
         </li>
 
-        <li>
+        <li *ngIf="!getIsWarehouseowner">
           <a
             class="side-link"
             routerLinkActive="active"
@@ -189,7 +189,7 @@
             <span>Auto Bereitschaft</span>
           </a>
         </li>
-        <li>
+        <li *ngIf="!getIsWarehouseowner">
           <a
             class="side-link"
             routerLinkActive="active"
@@ -216,7 +216,7 @@
             <span>Gebuchte Services </span>
           </a>
         </li>
-        <li>
+        <li *ngIf="!getIsWarehouseowner">
           <a
             class="side-link"
             routerLinkActive="active"
@@ -242,7 +242,7 @@
             <span>Suche Parkplätzen</span>
           </a>
         </li>
-        <li>
+        <li *ngIf="getIsWarehouseowner">
           <a
             class="side-link"
             routerLinkActive="active"
@@ -268,7 +268,7 @@
             <span>Termine</span>
           </a>
         </li>
-        <li>
+        <li *ngIf="!getIsWarehouseowner">
           <a
             class="side-link"
             routerLinkActive="active"
@@ -313,7 +313,12 @@
                 />
               </svg>
             </span>
-            <span (click)="logout()">Logout</span>
+            <span 
+            (click)="logout()" 
+            routerLinkActive="active"
+            routerLink="">
+            Logout
+          </span>
           </a>
         </li>
       </ul>

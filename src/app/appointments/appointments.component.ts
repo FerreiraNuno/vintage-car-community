@@ -46,7 +46,6 @@ export class AppointmentsComponent implements OnInit, OnDestroy {
         bin: {
           id: 3,
           name: 'Gens Maya',
-          dimension: { width: 45, height: 75 },
           location: {
             houseNumber: 9,
             streetName: 'Sefrd Jumns',
@@ -76,7 +75,6 @@ export class AppointmentsComponent implements OnInit, OnDestroy {
         bin: {
           id: 3,
           name: 'Gens Maya',
-          dimension: { width: 45, height: 75 },
           location: {
             houseNumber: 9,
             streetName: 'Sefrd Jumns',
@@ -106,7 +104,6 @@ export class AppointmentsComponent implements OnInit, OnDestroy {
         bin: {
           id: 3,
           name: 'Gens Maya',
-          dimension: { width: 45, height: 75 },
           location: {
             houseNumber: 9,
             streetName: 'Sefrd Jumns',
@@ -136,7 +133,6 @@ export class AppointmentsComponent implements OnInit, OnDestroy {
         bin: {
           id: 3,
           name: 'Gens Maya',
-          dimension: { width: 45, height: 75 },
           location: {
             houseNumber: 9,
             streetName: 'Sefrd Jumns',
@@ -166,7 +162,6 @@ export class AppointmentsComponent implements OnInit, OnDestroy {
         bin: {
           id: 3,
           name: 'Gens Maya',
-          dimension: { width: 45, height: 75 },
           location: {
             houseNumber: 9,
             streetName: 'Sefrd Jumns',
@@ -196,7 +191,6 @@ export class AppointmentsComponent implements OnInit, OnDestroy {
         bin: {
           id: 3,
           name: 'Gens Maya',
-          dimension: { width: 45, height: 75 },
           location: {
             houseNumber: 9,
             streetName: 'Sefrd Jumns',

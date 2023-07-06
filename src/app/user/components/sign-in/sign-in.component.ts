@@ -51,7 +51,7 @@ export class SignInComponent implements OnInit, OnDestroy {
           .signInWithEmailAndPassword(email, password)
           .then((res) => {
             this.isLoggingIn = false;
-            this.router.navigate(['dashboard']);
+            this.router.navigate(['dashboard/main']);
           });
       } catch (err: any) {
         this.isLoggingIn = false;

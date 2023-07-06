@@ -1,8 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
-import { PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+
 import {
 } from 'src/app/shared/models/response.model';
 import { StorageBin } from '../../models/storage-bin.model';
@@ -19,7 +20,19 @@ import {
 })
 export class AllStorageBinsComponent implements OnInit, OnDestroy {
   private sub: Subscription = new Subscription();
-  public storageBins: StorageBin[] = [];
+  public storageBins: StorageBin[] = [{
+    name: 'Lore ipsum',
+    location: {
+      houseNumber: 5,
+      streetName: 'Sefrd Jumns',
+      city: 'Hansberger',
+    },
+    serviceTime: {
+      start: '12:30PM',
+      end: '4:30PM',
+    },
+    uid: "123"
+  }];
   public binForm!: UntypedFormGroup;
 
 
@@ -27,6 +40,8 @@ export class AllStorageBinsComponent implements OnInit, OnDestroy {
     private router: Router,
     private fb: UntypedFormBuilder,
     private activeRoute: ActivatedRoute,
+    private afAuth: AngularFireAuth, 
+    private firestore: AngularFirestore
   ) {}
 
   ngOnInit(): void {
@@ -37,15 +52,10 @@ export class AllStorageBinsComponent implements OnInit, OnDestroy {
   public initBinForm(): void {
     this.binForm = this.fb.group({
       name: ['', Validators.required],
-      dimension: this.fb.group({
-        width: ['', Validators.required],
-        height: ['', Validators.required],
-      }),
       location: this.fb.group({
         houseNumber: ['', Validators.required],
         streetName: ['', Validators.required],
         city: ['', Validators.required],
-        state: ['', Validators.required],
         country: ['', Validators.required],
       }),
       serviceTime: this.fb.group({
@@ -55,130 +65,45 @@ export class AllStorageBinsComponent implements OnInit, OnDestroy {
     });
   }
 
-  public submit() {
+  public async submit() {
+    const form = this.binForm.value;
+    const user = await this.afAuth.currentUser;
     
+    this.firestore.collection('storages').add({
+      name: form.name,
+      location: {
+        houseNumber: form.location.houseNumber,
+        streetName: form.location.streetName,
+        city: form.location.city,
+      },
+      serviceTime: { 
+        start: form.serviceTime.start,
+        end: form.serviceTime.start 
+      },
+      uid: user?.uid,
+    });
+    this.getAllStorageBins();
   }
 
 
 
-  public getAllStorageBins(): void {
-    
-    this.storageBins = [
-      {
-        id: 1,
-        name: 'Lore ipsum',
-        dimension: { width: 45, height: 75 },
-        location: {
-          houseNumber: 5,
-          streetName: 'Sefrd Jumns',
-          city: 'Hansberger',
-          state: 'Berlin',
-          country: 'Germany',
-        },
-        serviceTime: {
-          start: '12:30PM',
-          end: '4:30PM',
-        },
-      },
-      {
-        id: 2,
-        name: 'Dens Lorem',
-        dimension: { width: 35, height: 55 },
-        location: {
-          houseNumber: 7,
-          streetName: 'Sefrd Jumns',
-          city: 'Hansberger',
-          state: 'Vienna',
-          country: 'Germany',
-        },
-        serviceTime: {
-          start: '2:30PM',
-          end: '4:30PM',
-        },
-      },
-      {
-        id: 3,
-        name: 'Gens Maya',
-        dimension: { width: 45, height: 75 },
-        location: {
-          houseNumber: 9,
-          streetName: 'Sefrd Jumns',
-          city: 'Hansberger',
-          state: 'Bremen',
-          country: 'Germany',
-        },
-        serviceTime: {
-          start: '1:30PM',
-          end: '4:30PM',
-        },
-      },
-      {
-        id: 4,
-        name: 'Reins Mayer',
-        dimension: { width: 45, height: 75 },
-        location: {
-          houseNumber: 5,
-          streetName: 'Sefrd Jumns',
-          city: 'Hansberger',
-          state: 'Dortmund',
-          country: 'Germany',
-        },
-        serviceTime: {
-          start: '12:30PM',
-          end: '4:30PM',
-        },
-      },
-      {
-        id: 5,
-        name: 'Temsnsa Ushdnbbd',
-        dimension: { width: 35, height: 55 },
-        location: {
-          houseNumber: 7,
-          streetName: 'Sefrd Jumns',
-          city: 'Hansberger',
-          state: 'Munich',
-          country: 'Germany',
-        },
-        serviceTime: {
-          start: '2:30PM',
-          end: '4:30PM',
-        },
-      },
-      {
-        id: 6,
-        name: 'Marina Herns',
-        dimension: { width: 45, height: 75 },
-        location: {
-          houseNumber: 9,
-          streetName: 'Sefrd Jumns',
-          city: 'Hansberger',
-          state: 'Leipzig',
-          country: 'Germany',
-        },
-        serviceTime: {
-          start: '1:30PM',
-          end: '4:30PM',
-        },
-      },
-      {
-        id: 7,
-        dimension: { width: 45, height: 78 },
-        location: {
-          houseNumber: 5,
-          streetName: 'jshjdjh',
-          city: 'jhjhjhjh',
-          state: 'jhjhdjhjh',
-          country: 'jhjshdjdshsd',
-        },
-        name: 'Jhdjhjhd',
-        serviceTime: { start: '2023-06-29T19:54', end: '2023-06-29T22:55' },
-      },
-    ];
-  }
+  public async getAllStorageBins() {
+    const user = await this.afAuth.currentUser;
+    const uid = user?.uid;
+
+    this.firestore
+      .collection<StorageBin>('storages', ref =>
+      ref.where('uid', '==', uid)
+    )
+      .valueChanges() // Subscribe to the Observable to get the data
+      .subscribe((storageBins: StorageBin[]) => {
+        this.storageBins = storageBins; // Assign the received data
+      });
+}
 
  
  
-  editStorage(id: number) {
+  editStorage(id: string) {
     this.router.navigate(['edit', id], { relativeTo: this.activeRoute });
   }
   ngOnDestroy() {

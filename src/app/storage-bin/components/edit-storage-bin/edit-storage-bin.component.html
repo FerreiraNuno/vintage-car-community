@@ -41,92 +41,9 @@
                   </div>
                 </div>
               </div>
-              <div class="col-12 col-md-6" formGroupName="dimension">
-                <legend>Dimension</legend>
-                <div class="row">
-                  <div class="col-12 col-md-6">
-                    <div class="form-group form_group">
-                      <label>Breite<span>● </span></label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Enter Width"
-                        
-                        formControlName="width"
-                        [ngClass]="{
-                          'is-invalid':
-                            (binForm.get('width')?.errors &&
-                              binForm.get('width')?.touched) ||
-                            (binForm.get('width')?.hasError('required') )
-                        }"
-                      />
-                      <div
-                        class="invalid-feedback"
-                        *ngIf="
-                          binForm.get('width')?.hasError('required') 
-                        "
-                      >
-                        Required
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-12 col-md-6">
-                    <div class="form-group form_group">
-                      <label>Höhe<span>● </span></label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Enter Height"
-                       
-                        formControlName="height"
-                        [ngClass]="{
-                          'is-invalid':
-                            (binForm.get('height')?.errors &&
-                              binForm.get('height')?.touched) ||
-                            (binForm.get('height')?.hasError('required') )
-                        }"
-                      />
-                      <div
-                        class="invalid-feedback"
-                        *ngIf="
-                          binForm.get('height')?.hasError('required')
-                        "
-                      >
-                        Required
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
               <div class="col-12" formGroupName="location">
                 <legend>Standort</legend>
                 <div class="row">
-                  <div class="col-12 col-md-4">
-                    <div class="form-group form_group">
-                      <label>Hausnummer <span>● </span></label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Enter House Number"
-                      
-                        formControlName="houseNumber"
-                        [ngClass]="{
-                          'is-invalid':
-                            (binForm.get('houseNumber')?.errors &&
-                              binForm.get('houseNumber')?.touched) ||
-                            (binForm.get('houseNumber')?.hasError('required'))
-                        }"
-                      />
-                      <div
-                        class="invalid-feedback"
-                        *ngIf="
-                          binForm.get('houseNumber')?.hasError('required') 
-                        "
-                      >
-                        Required
-                      </div>
-                    </div>
-                  </div>
                   <div class="col-12 col-md-4">
                     <div class="form-group form_group">
                       <label>Strasse Name <span>● </span></label>
@@ -147,6 +64,32 @@
                         class="invalid-feedback"
                         *ngIf="
                           binForm.get('streetName')?.hasError('required') 
+                        "
+                      >
+                        Required
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-4">
+                    <div class="form-group form_group">
+                      <label>Hausnummer <span>● </span></label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Enter House Number"
+                      
+                        formControlName="houseNumber"
+                        [ngClass]="{
+                          'is-invalid':
+                            (binForm.get('houseNumber')?.errors &&
+                              binForm.get('houseNumber')?.touched) ||
+                            (binForm.get('houseNumber')?.hasError('required'))
+                        }"
+                      />
+                      <div
+                        class="invalid-feedback"
+                        *ngIf="
+                          binForm.get('houseNumber')?.hasError('required') 
                         "
                       >
                         Required
@@ -179,58 +122,6 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-12 col-md-6">
-                    <div class="form-group form_group">
-                      <label>Staat<span>● </span></label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Enter State"
-                       
-                        formControlName="state"
-                        [ngClass]="{
-                          'is-invalid':
-                            (binForm.get('state')?.errors &&
-                              binForm.get('state')?.touched) ||
-                            (binForm.get('state')?.hasError('required'))
-                        }"
-                      />
-                      <div
-                        class="invalid-feedback"
-                        *ngIf="
-                          binForm.get('state')?.hasError('required') 
-                        "
-                      >
-                        Required
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-12 col-md-6">
-                    <div class="form-group form_group">
-                      <label>Land <span>● </span></label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Enter Country"
-                       
-                        formControlName="country"
-                        [ngClass]="{
-                          'is-invalid':
-                            (binForm.get('country')?.errors &&
-                              binForm.get('country')?.touched) ||
-                            (binForm.get('country')?.hasError('required') )
-                        }"
-                      />
-                      <div
-                        class="invalid-feedback"
-                        *ngIf="
-                          binForm.get('country')?.hasError('required') 
-                        "
-                      >
-                        Required
-                      </div>
-                    </div>
-                  </div>
                 </div>
               </div>
               <div class="col-12" formGroupName="serviceTime">
@@ -240,7 +131,7 @@
                     <div class="form-group form_group">
                       <label>Startzeit <span>● </span></label>
                       <input
-                        type="datetime-local"
+                        type="time"
                         class="form-control"
                         placeholder="Enter Start Time"
                        
@@ -266,7 +157,7 @@
                     <div class="form-group form_group">
                       <label>Endzeit<span>● </span></label>
                       <input
-                        type="datetime-local"
+                        type="time"
                         class="form-control"
                         placeholder="Enter End Time"
                        

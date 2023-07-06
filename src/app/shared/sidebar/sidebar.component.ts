@@ -1,4 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,11 +9,12 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
   public isOpen: boolean = false;
-  // @Input() showMinimizedMenu: boolean = false;
   public showMinimizedMenu: boolean = false;
 
   @Output() showMinimized = new EventEmitter();
-  constructor() {}
+  constructor(private firestore: AngularFirestore, private afAuth: AngularFireAuth) {}
+
+  public isWarehouseOwner = this.firestore.collection('users');
 
   ngOnInit(): void {}
 
@@ -27,6 +30,11 @@ export class SidebarComponent implements OnInit {
   }
 
   public logout(): void {
-    // this._currentUser.logOut();
+    this.afAuth.signOut();
+    
+  }
+
+  public getIsWarehouseowner() {
+    return this.isWarehouseOwner;
   }
 }

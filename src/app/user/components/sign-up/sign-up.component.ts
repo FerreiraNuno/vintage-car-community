@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import {
   UntypedFormGroup,
   UntypedFormBuilder,
   Validators,
 } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -26,7 +28,12 @@ export class SignUpComponent implements OnInit {
   public currentPage = 'company-information';
   public isFirstPage = true;
 
-  constructor(private fb: UntypedFormBuilder, private afAuth: AngularFireAuth) {
+  constructor(
+    private fb: UntypedFormBuilder, 
+    private afAuth: AngularFireAuth,
+    private router: Router,
+    private firestore: AngularFirestore
+    ) {
     this.afAuth = afAuth;
   }
 
@@ -38,7 +45,7 @@ export class SignUpComponent implements OnInit {
   public initRegisterForm() {
     this.registrationForm = this.fb.group(
       {
-        RoldeId: [0, Validators.required],
+        RoleId: [0, Validators.required],
         FirstName: ['', Validators.required],
         LastName: ['', Validators.required],
         PhoneNo1: ['', Validators.required],
@@ -75,17 +82,36 @@ export class SignUpComponent implements OnInit {
     if (this.registrationForm.valid) {
       this.isSiginingUp = true;
       const payload = this.registrationForm.value;
-
+  
       const email = payload.PersonalEmail;
       const password = payload.Password;
-
+      const userRole = payload.RoleId;
+      const firstName = payload.FirstName;
+      const lastName = payload.LastName;
+  
       try {
+        console.log("done");
+        // Create user in Firebase Authentication
         await this.afAuth.createUserWithEmailAndPassword(email, password);
       } catch (err: any) {
         this.error_message = err;
       }
-
+      
       this.isSiginingUp = false;
+      
+      // Get the newly created user's UID
+      const user = await this.afAuth.currentUser;
+      // Create a document in Firestore with the user's UID as the document ID
+      await this.firestore.collection('users').doc(user?.uid).set({
+        email: email,
+        userRole: userRole,
+        firstName: firstName,
+        lastName: lastName
+        // Add any other additional attributes you want to store
+      });
+      
+      // Navigate to the Dashboard
+      this.router.navigate(['dashboard/main']);
     }
   }
 

@@ -15,17 +15,14 @@ export class EditStorageBinComponent implements OnInit {
   public binForm!: UntypedFormGroup;
   
   public storageBinItem: StorageBin = {
-    id: 6,
     name: 'Marina Herns',
-    dimension: { width: 45, height: 75 },
     location: {
       houseNumber: 9,
       streetName: 'Sefrd Jumns',
       city: 'Hansberger',
-      state: 'Leipzig',
-      country: 'Germany',
     },
     serviceTime: { start: '2023-06-29T19:54', end: '2023-06-29T22:55' },
+    uid: "123"
   };
   constructor(private fb: UntypedFormBuilder) {}
 
@@ -38,10 +35,6 @@ export class EditStorageBinComponent implements OnInit {
   public initBinForm(): void {
     this.binForm = this.fb.group({
       name: [this.storageBinItem.name, Validators.required],
-      dimension: this.fb.group({
-        width: [this.storageBinItem.dimension.width, Validators.required],
-        height: [this.storageBinItem.dimension.height, Validators.required],
-      }),
       location: this.fb.group({
         houseNumber: [
           this.storageBinItem.location.houseNumber,
@@ -52,8 +45,6 @@ export class EditStorageBinComponent implements OnInit {
           Validators.required,
         ],
         city: [this.storageBinItem.location.city, Validators.required],
-        state: [this.storageBinItem.location.state, Validators.required],
-        country: [this.storageBinItem.location.country, Validators.required],
       }),
       serviceTime: this.fb.group({
         start: [this.storageBinItem.serviceTime.start, Validators.required],

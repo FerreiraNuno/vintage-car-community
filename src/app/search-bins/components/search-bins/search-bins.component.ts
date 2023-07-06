@@ -97,7 +97,6 @@ export class SearchBinsComponent implements OnInit {
       {
         id: 1,
         name: 'Lore ipsum',
-        dimension: { width: 45, height: 75 },
         location: {
           houseNumber: 5,
           streetName: 'Sefrd Jumns',
@@ -113,7 +112,6 @@ export class SearchBinsComponent implements OnInit {
       {
         id: 2,
         name: 'Dens Lorem',
-        dimension: { width: 35, height: 55 },
         location: {
           houseNumber: 7,
           streetName: 'Sefrd Jumns',
@@ -129,7 +127,6 @@ export class SearchBinsComponent implements OnInit {
       {
         id: 3,
         name: 'Gens Maya',
-        dimension: { width: 45, height: 75 },
         location: {
           houseNumber: 9,
           streetName: 'Sefrd Jumns',
@@ -145,7 +142,6 @@ export class SearchBinsComponent implements OnInit {
       {
         id: 4,
         name: 'Reins Mayer',
-        dimension: { width: 45, height: 75 },
         location: {
           houseNumber: 5,
           streetName: 'Sefrd Jumns',
@@ -161,7 +157,6 @@ export class SearchBinsComponent implements OnInit {
       {
         id: 5,
         name: 'Temsnsa Ushdnbbd',
-        dimension: { width: 35, height: 55 },
         location: {
           houseNumber: 7,
           streetName: 'Sefrd Jumns',
@@ -177,7 +172,6 @@ export class SearchBinsComponent implements OnInit {
       {
         id: 6,
         name: 'Marina Herns',
-        dimension: { width: 45, height: 75 },
         location: {
           houseNumber: 9,
           streetName: 'Sefrd Jumns',

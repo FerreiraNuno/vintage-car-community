@@ -27,7 +27,6 @@ export interface Cars {
 export interface StorageBin {
   id: number;
   name: string;
-  dimension: { width: number; height: number };
   location: {
     houseNumber: number;
     streetName: string;
